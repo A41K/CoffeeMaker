@@ -1,0 +1,412 @@
+body {
+    font-family: 'Press Start 2P', cursive, sans-serif; /* A common pixel font, ensure it's imported or available */
+    background-color: #222;
+    color: #fff;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    image-rendering: pixelated; /* Crisps up scaled images */
+}
+
+#game-container {
+    width: 800px;
+    background-color: #333;
+    border: 4px solid #111;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    border-bottom: 4px solid #111;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 24px;
+    color: #ffcc00; /* Gold-ish color */
+    text-shadow: 2px 2px #000;
+}
+
+#player-stats span {
+    font-size: 14px;
+    background-color: #444;
+    padding: 5px 10px;
+    border: 2px solid #111;
+    margin-right: 10px; /* Add some spacing between stats */
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.game-section {
+    background-color: #444;
+    border: 2px solid #111;
+    padding: 15px;
+}
+
+.game-section h2 {
+    font-size: 18px;
+    margin-top: 0;
+    color: #ffcc00;
+    border-bottom: 2px solid #111;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
+select, button {
+    font-family: inherit;
+    font-size: 12px;
+    padding: 8px;
+    background-color: #555;
+    color: #fff;
+    border: 2px solid #111;
+    margin-bottom: 10px;
+    width: calc(100% - 20px); /* Account for padding */
+    box-sizing: border-box;
+}
+
+select {
+    cursor: pointer;
+}
+
+button {
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #666;
+}
+
+button:active {
+    background-color: #777;
+}
+
+#making-process button {
+    display: block;
+    width: calc(100% - 4px); /* Account for border */
+}
+
+#step-feedback {
+    font-size: 12px;
+    color: #00ff00; /* Green for positive feedback */
+    min-height: 18px;
+}
+
+#coffee-result p {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.open-shop-button {
+    background-color: #007bff; /* Blue for shop button */
+    color: white;
+    border: 2px solid #0056b3;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-top: 10px; /* Add some space from other elements */
+    width: auto; /* Allow button to size based on content */
+    display: inline-block; /* Allow it to sit next to other elements */
+    margin-left: 10px;
+}
+
+.open-shop-button:hover {
+    background-color: #0056b3;
+}
+
+#coffee-result span {
+    font-weight: bold;
+    color: #ffcc00;
+}
+
+#sell-coffee-btn {
+    background-color: #009933; /* Green for sell */
+}
+
+#sell-coffee-btn:hover {
+    background-color: #00cc44;
+}
+
+#shop-log {
+    margin-top: 20px;
+    grid-column: span 2; /* Make log span both columns */
+}
+
+#log-list {
+    list-style: none;
+    padding: 0;
+    max-height: 150px;
+    overflow-y: auto;
+    font-size: 12px;
+}
+
+#log-list li {
+    padding: 3px 0;
+    border-bottom: 1px dashed #555;
+}
+
+#log-list li:last-child {
+    border-bottom: none;
+}
+
+/* Minigame and Progress Bar Styles */
+.minigame-area {
+    margin-top: 15px;
+    padding: 10px;
+    border: 2px dashed #666;
+}
+
+.minigame-area p {
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.progress-bar-container {
+    width: 100%;
+    background-color: #222;
+    border: 1px solid #111;
+    height: 20px;
+    margin-top: 10px;
+}
+
+.progress-bar {
+    width: 0%; /* Initial width */
+    height: 100%;
+    background-color: #00ff00; /* Green progress */
+    transition: width 0.1s linear;
+}
+
+#brew-minigame input[type="range"] {
+    width: 80%;
+    margin-bottom: 5px;
+}
+
+#customer-area {
+    grid-column: span 2; /* Make customer area span both columns for now */
+    text-align: center;
+}
+
+#customer-info p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+#customer-feedback {
+    font-size: 14px;
+    color: #ffcc00; /* Gold for customer feedback */
+    min-height: 20px;
+    margin-top: 10px;
+}
+
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+    font-family: 'Press Start 2P', cursive, sans-serif;
+}
+
+.modal-content {
+    background-color: #333;
+    margin: 10% auto; /* 10% from the top and centered */
+    padding: 20px;
+    border: 4px solid #111;
+    width: 80%; /* Could be more or less, depending on screen size */
+    max-width: 600px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    position: relative;
+}
+
+#daily-summary {
+    grid-column: span 2;
+    text-align: center;
+}
+
+#daily-summary h2 {
+    color: #ffcc00;
+}
+
+#daily-summary p {
+    font-size: 14px;
+    margin: 8px 0;
+}
+
+#daily-summary strong {
+    color: #00ff00;
+}
+
+.modal-content h2, .modal-content h3 {
+    color: #ffcc00;
+    text-align: center;
+    border-bottom: 2px solid #111;
+    padding-bottom: 5px;
+}
+
+.modal-content h3 {
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.modal-content button {
+    display: block;
+    width: calc(100% - 4px);
+    margin-bottom: 10px;
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#open-shop-btn, #open-employee-modal-btn {
+    position: absolute;
+    padding: 8px 12px;
+    font-size: 12px;
+    background-color: #007bff; /* Blue for shop button */
+    color: white;
+    border: 2px solid #0056b3;
+    cursor: pointer;
+    font-family: 'Press Start 2P', cursive;
+    text-transform: uppercase;
+}
+
+#open-shop-btn {
+    top: 20px;
+    right: 20px;
+}
+
+#open-employee-modal-btn {
+    top: 60px; /* Position below the shop button */
+    right: 20px;
+}
+
+#open-shop-btn:hover, #open-employee-modal-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Employee Management Modal Styles */
+#employee-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.employee-card {
+    background-color: #444;
+    border: 2px solid #222;
+    padding: 15px;
+    border-radius: 5px;
+    width: calc(50% - 20px); /* Two cards per row, considering gap and padding */
+    box-sizing: border-box;
+}
+
+.employee-card h3 {
+    margin-top: 0;
+    color: #fff200;
+}
+
+.employee-card p {
+    margin-bottom: 8px;
+}
+
+.employee-card label {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.employee-card select, .employee-card input[type="text"] {
+    width: calc(100% - 10px);
+    padding: 5px;
+    background-color: #555;
+    border: 1px solid #333;
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    margin-bottom: 10px;
+}
+
+.employee-card button {
+    padding: 8px 12px;
+    background-color: #6a6a6a;
+    color: #fff200;
+    border: 2px solid #333;
+    cursor: pointer;
+    font-family: 'Press Start 2P', cursive;
+    text-transform: uppercase;
+    margin-top: 5px;
+}
+
+.employee-card button:hover {
+    background-color: #7a7a7a;
+}
+
+/* Import a pixel font if you have one, e.g., from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+.popup {
+    display: none; /* Hidden by default */
+    position: absolute; /* Positioned relative to the nearest positioned ancestor */
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 15px;
+    z-index: 100; /* Sit on top */
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    border-radius: 5px;
+    font-size: 0.9em;
+}
+
+.popup h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.popup p {
+    margin: 5px 0;
+    line-height: 1.4;
+}
+
+.popup p strong {
+    color: #555;
+}
+
+.popup p span {
+    color: #333; /* Ensure text is visible against light background */
+}
+
+/* Add more styles as needed */

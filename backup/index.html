@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Coffee Tycoon</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="game-container">
+        <header>
+            <h1>Coffee Tycoon</h1>
+            <div id="player-stats">
+                <span>Money: <span id="money">$100</span></span>
+                <span>Time: <span id="game-time">8:00 AM</span></span>
+                <span>Day: <span id="game-day">1</span></span>
+            </div>
+        </header>
+
+        <main>
+            <section id="ingredient-selection" class="game-section">
+                <h2>Ingredients</h2>
+                <div id="beans-selector">
+                    <label for="beans">Coffee Beans:</label>
+                    <select id="beans">
+                        <option value="robusta" data-price="5" data-quality="1">Robusta Beans ($5)</option>
+                        <option value="arabica" data-price="10" data-quality="2">Arabica Beans ($10)</option>
+                        <option value="decaf" data-price="10" data-quality="2">Decaf Beans ($10)</option>
+                        <option value="liberica" data-price="15" data-quality="3">Liberica Beans ($15)</option>
+                        <option value="excelsa" data-price="20" data-quality="4">Excelsa Beans ($20)</option>
+                        <option value="geisha" data-price="35" data-quality="5">Geisha Beans ($35)</option>
+                        <option value="hawaiian-kona" data-price="50" data-quality="6">Hawaiian Kona Beans ($50)</option>
+                        <option value="columbian" data-price="75" data-quality="7">Columbian Beans ($75)</option>
+                        <option value="japanese" data-price="100" data-quality="8">Japanese Beans ($100)</option>
+                        <option value="kenyan" data-price="125" data-quality="9">Kenyan Beans ($125)</option>
+                        <option value="ethiopian" data-price="150" data-quality="10">Ethiopian Beans ($150)</option>
+                    </select>
+                </div>
+                <div id="milk-selector">
+                    <label for="milk">Milk:</label>
+                    <select id="milk">
+                        <option value="none" data-price="0" data-quality="0" data-allergy="none">None</option>
+                        <option value="dairy" data-price="2" data-quality="1" data-allergy="lactose">Dairy Milk ($2)</option>
+                        <option value="oat" data-price="3" data-quality="1" data-allergy="gluten">Oat Milk ($3)</option> <!-- Oat can have gluten contamination -->
+                        <option value="almond" data-price="4" data-quality="1" data-allergy="nuts">Almond Milk ($4)</option>
+                        <option value="soy" data-price="3" data-quality="1" data-allergy="soy">Soy Milk ($3)</option>
+                        <option value="coconut" data-price="4" data-quality="1" data-allergy="none">Coconut Milk ($4)</option>
+                        <option value="buffalo" data-price="10" data-quality="3" data-allergy="lactose">Buffalo Milk ($10)</option>
+                        <option value="skim-milk" data-price="4" data-quality="1" data-allergy="none">Skim Milk ($4)</option>
+                        <option value="steamed_milk" data-price="3" data-quality="1" data-allergy="lactose">Steamed Milk ($3)</option>
+                    </select>
+                </div>
+                <div id="sweetener-selector">
+                    <label for="sweetener">Sweetener:</label>
+                    <select id="sweetener">
+                        <option value="none" data-price="0" data-quality="0">None</option>
+                        <option value="sugar" data-price="1" data-quality="1">White Sugar ($1)</option>
+                        <option value="brown_sugar" data-price="2" data-quality="1">Brown Sugar ($2)</option>
+                        <option value="maple_syrup" data-price="4" data-quality="2">Maple Syrup ($4)</option>
+                        <option value="honey" data-price="3" data-quality="2">Honey ($3)</option>
+                        <option value="stevia" data-price="2" data-quality="1">Stevia ($2)</option>
+                        <option value="sugar_syrup" data-price="3" data-quality="1">Sugar Syrup ($3)</option>
+                        <option value="pearl" data-price="6" data-quality="3">Pearl Sugar ($6)</option>
+                    </select>
+                </div>
+                <div id="syrup-selector">
+                    <label for="syrup">Syrup:</label>
+                    <select id="syrup">
+                        <option value="none" data-price="0" data-quality="0">None</option>
+                        <option value="vanilla_syrup" data-price="3" data-quality="1">Vanilla Syrup ($3)</option>
+                        <option value="caramel_syrup" data-price="4" data-quality="2">Caramel Syrup ($4)</option>
+                        <option value="hazelnut_syrup" data-price="4" data-quality="2">Hazelnut Syrup ($4)</option>
+                        <option value="peppermint_syrup" data-price="3" data-quality="1">Peppermint Syrup ($3)</option>
+                        <option value="vanilla_extract" data-price="4" data-quality="2">Vanilla Extract ($4)</option>
+                        <option value="cocoa_syrup" data-price="4" data-quality="2">Cocoa Syrup ($4)</option>
+                        <option value="almond_syrup" data-price="4" data-quality="2">Almond Syrup ($4)</option>
+                        <option value="cinnamon_syrup" data-price="3" data-quality="1">Cinnamon Syrup ($3)</option>
+                        <option value="pumpkin_spice_syrup" data-price="3" data-quality="1">Pumpkin Spice Syrup ($3)</option>
+                    </select>
+                </div>
+                 <div id="extras-selector">
+                    <label for="extras">Extras:</label>
+                    <select id="extras">
+                        <option value="none" data-price="0" data-quality="0">None</option>
+                        <option value="ice" data-price="1" data-quality="0">Ice ($1)</option>
+                        <option value="chocolate_powder" data-price="3" data-quality="1">Chocolate Powder ($3)</option>
+                        <option value="cinnamon_stick" data-price="2" data-quality="1">Cinnamon Stick ($2)</option>
+                        <option value="vanilla_extract" data-price="4" data-quality="2">Vanilla Extract ($4)</option>
+                        <option value="caramel_drizzle" data-price="5" data-quality="2">Caramel Drizzle ($5)</option>
+                        <option value="whipped_cream" data-price="3" data-quality="1" data-allergy="lactose">Whipped Cream ($3)</option>   
+                        <option value="cocoa_powder" data-price="3" data-quality="1">Cocoa Powder ($3)</option>
+                        <option value="hazelnut_powder" data-price="3" data-quality="1">Hazelnut Powder ($3)</option>
+                        <option value="cocoa_butter" data-price="4" data-quality="2" data-allergy="lactose">Cocoa Butter ($4)</option>
+                        <option value="cinnamon" data-price="3" data-quality="1">Cinnamon ($3)</option>
+                        <option value="ginger" data-price="3" data-quality="1">Ginger ($3)</option>
+                        <option value="cardamom" data-price="2" data-quality="1">Cardamom ($2)</option>
+                        <option value="clove" data-price="2" data-quality="1">Clove ($2)</option>
+                        <option value="nutmeg" data-price="2" data-quality="1">Nutmeg ($2)</option>
+                        <option value="lemon" data-price="2" data-quality="1">Lemon ($2)</option>
+                        <option value="orange" data-price="2" data-quality="1">Orange ($2)</option>
+                        <option value="raspberry" data-price="2" data-quality="1">Raspberry ($2)</option>
+                        <option value="strawberry" data-price="2" data-quality="1">Strawberry ($2)</option>
+                        <option value="marshmallow" data-price="3" data-quality="1">Marshmallow ($3)</option>
+                    </select>
+                </div>
+            </section>
+
+            <section id="making-process" class="game-section">
+                <h2>Coffee Making Steps</h2>
+                <button id="grind-beans">1. Grind Beans</button>
+                <button id="brew-coffee">2. Brew Coffee</button>
+                <button id="add-milk">3. Add Milk (if selected)</button>
+                <button id="add-sweetener">4. Add Sweetener (if selected)</button>
+                <button id="add-syrup">5. Add Syrup (if selected)</button>
+                <button id="add-extras">6. Add Extras (if selected)</button>
+                <p id="step-feedback"></p>
+                <div id="grind-minigame" class="minigame-area" style="display:none;">
+                    <p>Grinding Beans... Mash the button!</p>
+                    <button id="grind-action-btn">Grind!</button>
+                    <div class="progress-bar-container"><div id="grind-progress" class="progress-bar"></div></div>
+                </div>
+                 <div id="brew-minigame" class="minigame-area" style="display:none;">
+                    <p>Brewing... Keep the temperature in range!</p>
+                    <input type="range" id="brew-temp-slider" min="85" max="95" value="50">
+                    <p>Target: 90-92°C</p>
+                    <div class="progress-bar-container"><div id="brew-progress" class="progress-bar"></div></div>
+                </div>
+                <div id="milk-minigame" class="minigame-area" style="display:none;">
+                    <p>Adding Milk... Pour carefully!</p>
+                    <button id="milk-action-btn">Pour!</button>
+                    <div class="progress-bar-container"><div id="milk-progress" class="progress-bar"></div></div>
+                </div>
+                <div id="sweetener-minigame" class="minigame-area" style="display:none;">
+                    <p>Adding Sweetener... Mix it well!</p>
+                    <button id="sweetener-action-btn">Mix!</button>
+                    <div class="progress-bar-container"><div id="sweetener-progress" class="progress-bar"></div></div>
+                </div>
+                <div id="syrup-minigame" class="minigame-area" style="display:none;">
+                    <p>Adding Syrup... Drizzle evenly!</p>
+                    <button id="syrup-action-btn">Drizzle!</button>
+                    <div class="progress-bar-container"><div id="syrup-progress" class="progress-bar"></div></div>
+                </div>
+            </section>
+
+            <section id="coffee-result" class="game-section">
+                <h2>Your Coffee</h2>
+                <p>Name: <span id="coffee-name">-</span></p>
+                <p>Quality: <span id="coffee-quality">-</span> / 10</p>
+                <p>Potential Price: $<span id="coffee-price">-</span></p>
+                <button id="make-coffee-btn">Make This Coffee!</button>
+                <button id="sell-coffee-btn" style="display:none;">Sell Coffee</button>
+                <button id="open-shop-btn" class="open-shop-button">Shop & Upgrades</button>
+                <button id="manage-employees-btn" class="open-shop-button">Manage Employees</button>
+                <button id="save-game-btn" class="open-shop-button">Save Game</button>
+                
+            </section>
+        </main>
+
+        <section id="customer-area" class="game-section">
+            <h2>Customer Order</h2>
+            <div id="customer-info" style="position: relative;"> <!-- Added position relative for popup positioning -->
+                <p>Customer: <span id="customer-name">Waiting for customer...</span></p>
+                <p>Request: <span id="customer-request">-</span></p>
+                <p>Allergies: <span id="customer-allergies">-</span></p>
+            </div>
+            <div id="order-details-popup" class="popup" style="display:none; position:absolute; border: 1px solid #ccc; background-color: #f9f9f9; padding: 10px; z-index: 100;">
+                <h4>Order Details:</h4>
+                <p><strong>Base:</strong> <span id="popup-base-request"></span></p>
+                <p><strong>Special:</strong> <span id="popup-special-request"></span></p>
+                <p><strong>Preferences:</strong> <span id="popup-preferences"></span></p>
+                <p><strong>Allergies:</strong> <span id="popup-allergies"></span></p>
+                <p><strong>Min Quality:</strong> <span id="popup-min-quality"></span></p>
+            </div>
+            <p id="customer-feedback"></p>
+        </section>
+
+        <section id="shop-log" class="game-section">
+            <h2>Shop Log</h2>
+            <ul id="log-list"></ul>
+        </section>
+
+        <section id="daily-summary" class="game-section" style="display:none;">
+            <h2>End of Day <span id="summary-day">1</span></h2>
+            <p>Customers Served: <span id="summary-customers">0</span></p>
+            <p>Gross Income: $<span id="summary-income">0</span></p>
+            <p>Coffee Costs: $<span id="summary-coffee-costs">0</span></p>
+            <p>Employee Wages: $<span id="summary-wages">0</span></p>
+            <p>Energy Bill: $<span id="summary-energy">0</span></p>
+            <p>Taxes: $<span id="summary-taxes">0</span></p>
+            <p><strong>Net Profit: $<span id="summary-profit">0</span></strong></p>
+            <button id="next-day-btn">Start Next Day</button>
+        </section>
+
+    </div>
+
+    <!-- Shop Modal (hidden by default) -->
+    <div id="shop-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-button" id="close-shop-btn">&times;</span>
+            <h2>Upgrades & Management</h2>
+            <div id="upgrades-section">
+                <h3>Production Upgrades</h3>
+                <button id="upgrade-grinder" data-cost="100">Upgrade Grinder (Cost: $100) - Faster Grinding</button>
+                <button id="upgrade-brewer" data-cost="150">Upgrade Brewer (Cost: $150) - Better Brew Quality</button>
+            </div>
+            <div id="automation-section">
+                <h3>Automation</h3>
+                <button id="automate-grinding" data-cost="500">Automate Grinding (Cost: $500)</button>
+            </div>
+            <div id="employees-section">
+                <h3>Employees</h3>
+                <button id="hire-barista" data-cost="200">Hire Barista (Cost: $200) - Helps make coffee</button>
+                <p>Employees: <span id="employee-count">0</span></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="renderer.js"></script>
+
+    <!-- Employee Management Modal -->
+    <div id="employee-management-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="close-employee-modal-btn">&times;</span>
+            <h2>Manage Employees</h2>
+            <div id="employee-list">
+                <!-- Employee cards will be dynamically added here -->
+            </div>
+            <p>Assign tasks to your employees to automate parts of the coffee-making process.</p>
+        </div>
+    </div>
+</body>
+</html>
