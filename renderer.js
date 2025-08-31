@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const employeeSkill = parts[2] || 'Barista';
                 const employeeEfficiency = parseFloat(parts[3]) || 1.0;
                 employees.push({
-                    id: `emp-${Date.now()}-${Math.floor(Math.random() * 1000)}`, // Assign a unique ID
+                    id: `emp-${Date.now()}-${Math.floor(Math.random() * 1000)}`, 
                     name: employeeName,
                     skill: employeeSkill,
                     efficiency: employeeEfficiency,
@@ -185,7 +185,6 @@ document.addEventListener('DOMContentLoaded', () => {
         addLog('Game state reset.');
     }
 
-    // Expose cheat function to the global scope for console access
     window.cheat = handleCheatCommand;
 
 
@@ -221,10 +220,10 @@ document.addEventListener('DOMContentLoaded', () => {
             dailyEnergyUsed = gameState.dailyEnergyUsed || 0;
             employees = gameState.employees ? gameState.employees.map(emp => ({
                 ...emp,
-                id: emp.id || `emp-${Date.now()}-${Math.floor(Math.random() * 1000)}` // Ensure unique ID for loaded employees
-            })) : []; // Load employees and ensure they have an ID
+                id: emp.id || `emp-${Date.now()}-${Math.floor(Math.random() * 1000)}`
+            })) : [];
             const savedLogs = gameState.logs || [];
-            logListEl.innerHTML = ''; // Clear existing logs
+            logListEl.innerHTML = ''; 
             savedLogs.forEach(logText => {
                 const listItem = document.createElement('li');
                 listItem.textContent = logText;
@@ -234,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updateMoneyDisplay();
             updateTimeDisplay();
             employeeCountEl.textContent = employeeCount;
-            renderEmployees(); // Re-render employees after loading
+            renderEmployees();
             addLog('Game loaded!');
         }
     }
@@ -291,7 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 efficiency: emp.efficiency,
                 assignment: emp.assignment
             })),
-            logs: Array.from(logListEl.children).map(li => li.textContent) // Save log entries
+            logs: Array.from(logListEl.children).map(li => li.textContent) 
         };
         localStorage.setItem('coffeeTycoonSave', JSON.stringify(gameState));
         addLog('Game saved!');
@@ -314,8 +313,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function addLog(message) {
         const listItem = document.createElement('li');
         listItem.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
-        logListEl.prepend(listItem); // Add to top
-        if (logListEl.children.length > 10) { // Keep log concise
+        logListEl.prepend(listItem); 
+        if (logListEl.children.length > 10) { 
             logListEl.removeChild(logListEl.lastChild);
         }
     }
@@ -362,7 +361,6 @@ document.addEventListener('DOMContentLoaded', () => {
         currentCoffee.cost = beans.price + milk.price + sweetener.price + extras.price + syrup.price;
         currentCoffee.baseQuality = beans.quality + milk.quality + sweetener.quality + extras.quality + syrup.quality;
 
-        // Name generation (simple version)
         let nameParts = [beans.value];
         if (milk.value !== 'none') nameParts.push(milk.value);
         if (sweetener.value !== 'none') nameParts.push(sweetener.value);
@@ -436,7 +434,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Determine sound file based on stepName
         let soundFileName = '';
-        let soundDuration = 0; // Approximate duration in ms
+        let soundDuration = 0;
 
         switch (stepName) {
             case 'grind':
@@ -459,7 +457,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 soundFileName = 'Syrup-adding.mp3';
                 soundDuration = 2000; // 1.5 seconds
                 break;
-            // No sound for 'extras' or other steps by default
         }
 
         if (soundFileName) {
